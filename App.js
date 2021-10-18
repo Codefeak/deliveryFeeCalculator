@@ -1,21 +1,131 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from "react";
+import { StatusBar } from "expo-status-bar";
+import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { Title as RNPTitle } from "react-native-paper";
+import moment from "moment";
+import TextInputComponent from "./components/TextInputComponent";
+import Apphead from "./components/Apphead";
+import DatePicker from "./components/DatePicker";
+import { Button } from "react-native-paper";
+import { calculate } from "./calculation";
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+	const [cartValue, setCartValue] = useState("");
+	const [deliveryDistance, setDeliveryDistance] = useState("");
+	const [amount, setAmount] = useState("");
+	const [time, setTime] = useState(moment().format());
+	const [totalPrice, setTotalPrice] = useState(0);
+
+	function onBtnPress() {
+		const result = calculate({
+			cartValue: Number(cartValue),
+			time: Number(time),
+			distance: Number(deliveryDistance),
+			amount: Number(amount),
+		});
+		setTotalPrice(result);
+	}
+
+  function btnDisable() {
+    if (cartValue === '' || deliveryDistance === '' || amount === '' || time === '') {
+      return true;
+    }
+    return false;
+  }
+	return (
+		<View style={styles.container}>
+			<StatusBar style="auto" />
+			<Apphead />
+			<SafeAreaView>
+				<View style={styles.inputContainer}>
+					<RNPTitle style={{ fontSize: 14 }}>Cart Value</RNPTitle>
+					<TextInputComponent
+						style={styles.textInput}
+						keyboardType="numeric"
+						text={cartValue}
+						setText={setCartValue}
+						rightAffix="€"
+					/>
+				</View>
+				<View style={styles.inputContainer}>
+					<RNPTitle style={{ fontSize: 14 }}>Delivery Distance</RNPTitle>
+					<TextInputComponent
+						style={styles.textInput}
+						keyboardType="numeric"
+						text={deliveryDistance}
+						setText={setDeliveryDistance}
+						rightAffix="m"
+					/>
+				</View>
+				<View style={styles.inputContainer}>
+					<RNPTitle style={{ fontSize: 14 }}>Amount of items</RNPTitle>
+					<TextInputComponent
+						style={styles.textInput}
+						keyboardType="numeric"
+						text={amount}
+						setText={setAmount}
+					/>
+				</View>
+				<View style={styles.inputContainer}>
+					<RNPTitle style={{ fontSize: 14 }}>Time</RNPTitle>
+					<DatePicker
+						style={styles.datePicker}
+						btnStyle={styles.btn}
+						value={time}
+						setDate={setTime}
+					/>
+				</View>
+				<View style={styles.calculateContainer}>
+					<Button
+						mode="contained"
+						style={styles.calculateBtn}
+						onPress={onBtnPress}
+            disabled={btnDisable()}
+					>
+						Calculate Delivery Price
+					</Button>
+				</View>
+				<View style={styles.totalContainer}>
+					<RNPTitle style={{ fontSize: 14 }}>
+						Delivery Price: {totalPrice} €
+					</RNPTitle>
+				</View>
+			</SafeAreaView>
+		</View>
+	);
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+	container: {
+		flex: 1,
+		backgroundColor: "#fff",
+	},
+	inputContainer: {
+		flexDirection: "row",
+		padding: 10,
+		justifyContent: "space-between",
+	},
+	textInput: {
+		marginLeft: 10,
+		width: 100,
+		height: 30,
+	},
+	btn: {
+		justifyContent: "flex-end",
+	},
+	datePicker: {
+		flex: 1,
+		borderRadius: 5,
+	},
+	calculateContainer: {
+		alignItems: "center",
+	},
+	calculateBtn: {
+		marginTop: 40,
+		width: "70%",
+	},
+  totalContainer: {
+    marginTop: 30,
+    padding: 20
+  }
 });
