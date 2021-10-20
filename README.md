@@ -6,10 +6,15 @@ This application can be test directly in mobile devices by using [Expo](https://
 
 ### Requirements
 
-* node
+* node less than 17.0.0
 * npm
 * git
 * expo-cli
+
+### Install Expo-cli
+```bash
+npm i --global expo-cli
+```
 
 #### 1 Clone the project
 ```bash
@@ -37,10 +42,8 @@ A metro bundler will automatically open in your default browser.The left side ba
 * production/development mode
 * connections (tunnel/LAN/Local)
 
-However, it is not necessary to choose any since there is a QR code available at the bottom and you can scan that QR code via any mobile devices and run the application on it. QR code can be scanned with Expo Go app in respective devices so installation of Expo Go app in mobile device is essential. You can find a link [here](https://expo.dev/client)
-
 #### Expo Go app for Android and iOS
-The fastest way to get up and running is to use the Expo Go app on your iOS or Android device. Expo Go allows you to open up apps that are being served through Expo CLI.
+The fastest way to get up and running is to use the Expo Go app on your iOS or Android device. Expo Go allows you to open up apps that are being served through Expo CLI. However, it is necessary both mobile and the PC where you run the project has to be connected in the same network.
 
 * [Andriod Play Store](https://play.google.com/store/apps/details?id=host.exp.exponent)
 * [iOS App Store](https://itunes.com/apps/exponent)

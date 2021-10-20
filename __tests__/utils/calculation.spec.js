@@ -7,7 +7,8 @@ import {
 	rushHourSurcharge,
 	checkRushHour,
 } from "../../utils/calculation";
-import moment from 'moment';
+import { formatDateTime } from "../../utils/date";
+import moment from "moment";
 
 describe("Delivery Fee Calculation", () => {
 	it("When the cartValue is equal to or more than 100 the price return should be 0€", () => {
@@ -24,7 +25,7 @@ describe("Delivery Fee Calculation", () => {
 		expect(result).toBe(4.6);
 	});
 
-  it("If the cart value is more than 10€, a surcharge is not added.", () => {
+	it("If the cart value is more than 10€, a surcharge is not added.", () => {
 		const cartValue = 15.4;
 		const result = withValueSurcharge(cartValue);
 		expect(result).toBe(0);
@@ -71,7 +72,18 @@ describe("Delivery Fee Calculation", () => {
 		const cartValue = 50;
 		const amount = 3;
 		const time = moment("2021-10-22 19:30").format(); // 22nd Oct 2021 Friday 4:30pm UTC
-		const result = calculate({cartValue, distance, amount, time});
-		expect(result).toBe(2.2)
-	})
+		const result = calculate({ cartValue, distance, amount, time });
+		expect(result).toBe(2.2);
+	});
+});
+
+describe("Date", () => {
+	it("should take date and time as argument and return a after combining them", () => {
+		const date = new Date("2021-10-25 00:00");
+		const time = new Date("2021-10-22 19:30");
+		const expectedResult = moment(new Date("2021-10-25 19:30"))
+			.format("LLL");
+		const result = formatDateTime(date, time).format("LLL");
+		expect(result).toBe(expectedResult);
+	});
 });

@@ -13,17 +13,18 @@ export default function DatePicker(props) {
 	const [showBtn, setShowBtn] = useState(false);
 
 	function onChange(event, val) {
-		mode === "date" ? setSelectedDate(val) : mode === "time" && setSelectedTime(val);
+		mode === "date"
+			? setSelectedDate(val)
+			: mode === "time" && setSelectedTime(val);
 		setDate(val);
 		setRenderValue(val);
 	}
 
-	function OnPressOK() {
+	function onPressOK() {
 		setDate(renderValue);
 		setShow(false);
 		setShowBtn(false);
 	}
-
 
 	function showDatePicker() {
 		setShow(true);
@@ -32,24 +33,36 @@ export default function DatePicker(props) {
 
 	const component = (
 		<View style={style}>
-			<Button onPress={showDatePicker} contentStyle={btnStyle} mode="text" >
-				{mode === "date" ?
-					renderValue === null ? "Select Date" : moment(new Date(renderValue)).format("LL") :
-					mode === "time" &&
-						renderValue === null ? "Select Time" : moment(new Date(renderValue)).format("LT")
-				}
+			<Button
+				testID="showDateTimeBtn"
+				onPress={showDatePicker}
+				contentStyle={btnStyle}
+				mode="text"
+			>
+				{mode === "date"
+					? renderValue === null
+						? "Select Date"
+						: moment(new Date(renderValue)).format("LL")
+					: mode === "time" && renderValue === null
+					? "Select Time"
+					: moment(new Date(renderValue)).format("LT")}
 			</Button>
-			
-			{show && (<DateTimePicker
-				testID="dateTimePicker"
-				value={typeof value === 'string' ? new Date() : new Date(value)}
-				mode={mode}
-				is24Hour={true}
-				display="default"
-				onChange={onChange}
-			/>)}
+
+			{show && (
+				<View testID="dateTimePicker">
+					<DateTimePicker
+						value={typeof value === "string" ? new Date() : new Date(value)}
+						mode={mode}
+						is24Hour={true}
+						display="default"
+						onChange={onChange}
+					/>
+				</View>
+			)}
 			{showBtn && (
-				<Button onPress={OnPressOK} mode="outlined">OK</Button>
+				<Button testID="okBtn" onPress={onPressOK} mode="outlined">
+					OK
+				</Button>
 			)}
 		</View>
 	);
