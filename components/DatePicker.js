@@ -6,39 +6,51 @@ import { Button } from "react-native-paper";
 
 export default function DatePicker(props) {
 	const { value, style, btnStyle, setDate, mode } = props;
-	const [renderValue, setRenderValue] = useState(null);
+	const [renderValue, setRenderValue] = useState(new Date());
 	const [selectedDate, setSelectedDate] = useState(null);
 	const [selectedTime, setSelectedTime] = useState(null);
 	const [show, setShow] = useState(false);
+	const [showBtn, setShowBtn] = useState(false);
 
 	function onChange(event, val) {
 		mode === "date" ? setSelectedDate(val) : mode === "time" && setSelectedTime(val);
 		setDate(val);
 		setRenderValue(val);
-        setShow(false);
+	}
+
+	function OnPressOK() {
+		setDate(renderValue);
+		setShow(false);
+		setShowBtn(false);
 	}
 
 
 	function showDatePicker() {
 		setShow(true);
+		setShowBtn(true);
 	}
 
 	const component = (
 		<View style={style}>
 			<Button onPress={showDatePicker} contentStyle={btnStyle} mode="text" >
 				{mode === "date" ?
-					moment(renderValue === null ? new Date() : new Date(renderValue)).format("LL") :
-					mode === "time" && moment(renderValue === null ? new Date() : new Date(renderValue)).format("LT")
+					renderValue === null ? "Select Date" : moment(new Date(renderValue)).format("LL") :
+					mode === "time" &&
+						renderValue === null ? "Select Time" : moment(new Date(renderValue)).format("LT")
 				}
 			</Button>
+			
 			{show && (<DateTimePicker
 				testID="dateTimePicker"
-				value={new Date(value)}
+				value={typeof value === 'string' ? new Date() : new Date(value)}
 				mode={mode}
 				is24Hour={true}
-				display="spinner"
+				display="default"
 				onChange={onChange}
 			/>)}
+			{showBtn && (
+				<Button onPress={OnPressOK} mode="outlined">OK</Button>
+			)}
 		</View>
 	);
 

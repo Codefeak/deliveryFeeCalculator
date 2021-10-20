@@ -14,8 +14,8 @@ export default function App() {
 	const [cartValue, setCartValue] = useState("");
 	const [deliveryDistance, setDeliveryDistance] = useState("");
 	const [amount, setAmount] = useState("");
-	const [date, setDate] = useState(moment().format());
-	const [time, setTime] = useState(moment().format());
+	const [date, setDate] = useState('Select Date');
+	const [time, setTime] = useState('Select Time');
 	const [totalPrice, setTotalPrice] = useState(0);
 
 	function onBtnPress() {
@@ -33,8 +33,8 @@ export default function App() {
 			cartValue === "" ||
 			deliveryDistance === "" ||
 			amount === "" ||
-			date === "" ||
-			time === ""
+			date === "Select Date" ||
+			time === "Select Time"
 		) {
 			return true;
 		}
@@ -80,7 +80,7 @@ export default function App() {
 						mode="date"
 						style={styles.datePicker}
 						btnStyle={styles.btn}
-						value={moment(time)}
+						value={date === 'Select Date' ? date : moment(date)}
 						setDate={setDate}
 					/>
 				</View>
@@ -90,7 +90,7 @@ export default function App() {
 						mode="time"
 						style={styles.datePicker}
 						btnStyle={styles.btn}
-						value={moment(time)}
+						value={time === 'Select Time' ? time : moment(time)}
 						setDate={setTime}
 					/>
 				</View>
