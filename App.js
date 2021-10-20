@@ -7,31 +7,39 @@ import TextInputComponent from "./components/TextInputComponent";
 import Apphead from "./components/Apphead";
 import DatePicker from "./components/DatePicker";
 import { Button } from "react-native-paper";
-import { calculate } from "./calculation";
+import { calculate } from "./utils/calculation";
+import { formatDateTime } from "./utils/date";
 
 export default function App() {
 	const [cartValue, setCartValue] = useState("");
 	const [deliveryDistance, setDeliveryDistance] = useState("");
 	const [amount, setAmount] = useState("");
+	const [date, setDate] = useState(moment().format());
 	const [time, setTime] = useState(moment().format());
 	const [totalPrice, setTotalPrice] = useState(0);
 
 	function onBtnPress() {
 		const result = calculate({
 			cartValue: Number(cartValue),
-			time: Number(time),
+			time: formatDateTime(date, time),
 			distance: Number(deliveryDistance),
 			amount: Number(amount),
 		});
 		setTotalPrice(result);
 	}
 
-  function btnDisable() {
-    if (cartValue === '' || deliveryDistance === '' || amount === '' || time === '') {
-      return true;
-    }
-    return false;
-  }
+	function btnDisable() {
+		if (
+			cartValue === "" ||
+			deliveryDistance === "" ||
+			amount === "" ||
+			date === "" ||
+			time === ""
+		) {
+			return true;
+		}
+		return false;
+	}
 	return (
 		<View style={styles.container}>
 			<StatusBar style="auto" />
@@ -67,11 +75,22 @@ export default function App() {
 					/>
 				</View>
 				<View style={styles.inputContainer}>
-					<RNPTitle style={{ fontSize: 14 }}>Time</RNPTitle>
+					<RNPTitle style={{ fontSize: 14 }}>Date</RNPTitle>
 					<DatePicker
+						mode="date"
 						style={styles.datePicker}
 						btnStyle={styles.btn}
-						value={time}
+						value={moment(time)}
+						setDate={setDate}
+					/>
+				</View>
+				<View style={styles.inputContainer}>
+					<RNPTitle style={{ fontSize: 14 }}>Time</RNPTitle>
+					<DatePicker
+						mode="time"
+						style={styles.datePicker}
+						btnStyle={styles.btn}
+						value={moment(time)}
 						setDate={setTime}
 					/>
 				</View>
@@ -80,7 +99,7 @@ export default function App() {
 						mode="contained"
 						style={styles.calculateBtn}
 						onPress={onBtnPress}
-            disabled={btnDisable()}
+						disabled={btnDisable()}
 					>
 						Calculate Delivery Price
 					</Button>
@@ -124,8 +143,8 @@ const styles = StyleSheet.create({
 		marginTop: 40,
 		width: "70%",
 	},
-  totalContainer: {
-    marginTop: 30,
-    padding: 20
-  }
+	totalContainer: {
+		marginTop: 30,
+		padding: 20,
+	},
 });

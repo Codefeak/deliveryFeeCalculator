@@ -5,6 +5,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
+    "test": "jest",
     "eject": "expo eject"
   },
   "dependencies": {
@@ -12,6 +13,7 @@
     "expo": "~42.0.1",
     "expo-status-bar": "~1.0.4",
     "formik": "^2.2.9",
+    "jest-expo": "^42.1.0",
     "moment": "^2.29.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
@@ -21,6 +23,9 @@
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"
+  },
+  "jest": {
+    "preset": "jest-expo"
   },
   "private": true
 }

@@ -5,14 +5,15 @@ import { View, Platform } from "react-native";
 import { Button } from "react-native-paper";
 
 export default function DatePicker(props) {
-	const { value, style, btnStyle, setDate } = props;
+	const { value, style, btnStyle, setDate, mode } = props;
 	const [renderValue, setRenderValue] = useState(null);
 	const [selectedDate, setSelectedDate] = useState(null);
+	const [selectedTime, setSelectedTime] = useState(null);
 	const [show, setShow] = useState(false);
 
 	function onChange(event, val) {
-		setSelectedDate(val);
-		setDate(moment(val));
+		mode === "date" ? setSelectedDate(val) : mode === "time" && setSelectedTime(val);
+		setDate(val);
 		setRenderValue(val);
         setShow(false);
 	}
@@ -25,14 +26,15 @@ export default function DatePicker(props) {
 	const component = (
 		<View style={style}>
 			<Button onPress={showDatePicker} contentStyle={btnStyle} mode="text" >
-				{moment(
-					renderValue === null ? new Date() : new Date(renderValue)
-				).format("LL")}
+				{mode === "date" ?
+					moment(renderValue === null ? new Date() : new Date(renderValue)).format("LL") :
+					mode === "time" && moment(renderValue === null ? new Date() : new Date(renderValue)).format("LT")
+				}
 			</Button>
 			{show && (<DateTimePicker
 				testID="dateTimePicker"
 				value={new Date(value)}
-				mode="date"
+				mode={mode}
 				is24Hour={true}
 				display="spinner"
 				onChange={onChange}
