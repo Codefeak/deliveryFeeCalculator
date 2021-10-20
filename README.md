@@ -1,4 +1,4 @@
-# deliveryFeeCalculator
+# Delivery Fee Calculator
 react native/ expo delivery fee calculator 
 
 ## Description
@@ -42,8 +42,8 @@ However, it is not necessary to choose any since there is a QR code available at
 #### Expo Go app for Android and iOS
 The fastest way to get up and running is to use the Expo Go app on your iOS or Android device. Expo Go allows you to open up apps that are being served through Expo CLI.
 
-*[Andriod Play Store](https://play.google.com/store/apps/details?id=host.exp.exponent)
-*[iOS App Store](https://itunes.com/apps/exponent)
+* [Andriod Play Store](https://play.google.com/store/apps/details?id=host.exp.exponent)
+* [iOS App Store](https://itunes.com/apps/exponent)
 
 When the Expo Go app is finished installing, open it up. If you created an account with expo-cli then you can sign in here on the "Profile" tab. This will make it easier for you to open projects in the client when you have them open in development — they will appear automatically in the "Projects" tab of the client app.
 
