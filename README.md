@@ -6,7 +6,7 @@ This application can be test directly in mobile devices by using [Expo](https://
 
 ### Requirements
 
-* node less than 17.0.0
+* node less than 17.0.0 (14.18.1 recommended, expo-cli is not yet tested for Node v17.0.0)
 * npm
 * git
 * expo-cli
@@ -43,7 +43,7 @@ A metro bundler will automatically open in your default browser.The left side ba
 * connections (tunnel/LAN/Local)
 
 #### Expo Go app for Android and iOS
-The fastest way to get up and running is to use the Expo Go app on your iOS or Android device. Expo Go allows you to open up apps that are being served through Expo CLI. However, it is necessary both mobile and the PC where you run the project has to be connected in the same network.
+The fastest way to get up and running is to use the Expo Go app on your iOS or Android device. Expo Go allows you to open up apps that are being served through Expo CLI. However, it is necessary both mobile and the PC where you run the project has to be connected in the same network. In any case if the project is not shown in the list try to change connection to TUNNEL and use QRscan in ExpoGo (for Android) or Cam app (for iOS) to run the application.
 
 * [Andriod Play Store](https://play.google.com/store/apps/details?id=host.exp.exponent)
 * [iOS App Store](https://itunes.com/apps/exponent)
