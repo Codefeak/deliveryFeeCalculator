@@ -1,7 +1,7 @@
 import moment from "moment";
 import React from "react";
-import DatePicker from "../../components/DatePicker";
-import { fireEvent, render, waitFor } from "@testing-library/react-native";
+import DatePicker from "../../../src/components/DatePicker";
+import { fireEvent, render } from "@testing-library/react-native";
 
 describe("Show Date Picker", () => {
 	it("should show date picker when Date/Time is pressed", () => {

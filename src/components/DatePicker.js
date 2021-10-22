@@ -49,20 +49,19 @@ export default function DatePicker(props) {
 			</Button>
 
 			{show && (
-				<View testID="dateTimePicker">
+				<View testID="dateTimePicker" style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
 					<DateTimePicker
 						value={typeof value === "string" ? new Date() : new Date(value)}
 						mode={mode}
+						style={{flex: 0.4}}
 						is24Hour={true}
 						display="default"
 						onChange={onChange}
 					/>
-				</View>
-			)}
-			{showBtn && (
-				<Button testID="okBtn" onPress={onPressOK} mode="outlined">
+					<Button testID="okBtn" style={{flex: 0.01}} onPress={onPressOK} mode="contained">
 					OK
-				</Button>
+					</Button>
+				</View>
 			)}
 		</View>
 	);

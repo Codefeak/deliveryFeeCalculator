@@ -3,11 +3,9 @@ import {
 	checkDistance,
 	exceedItemSurcharge,
 	withValueSurcharge,
-	addSurcharges,
-	rushHourSurcharge,
 	checkRushHour,
-} from "../../utils/calculation";
-import { formatDateTime } from "../../utils/date";
+} from "../../../src/utils/calculation";
+import { formatDateTime } from "../../../src/utils/date";
 import moment from "moment";
 
 describe("Delivery Fee Calculation", () => {

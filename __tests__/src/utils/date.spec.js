@@ -1,4 +1,4 @@
-import { formatDateTime } from "../../utils/date";
+import { formatDateTime } from "../../../src/utils/date";
 import moment from "moment";
 
 describe("Format date and Time", () => {
